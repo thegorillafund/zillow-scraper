@@ -1,0 +1,12 @@
+pandas
+numpy
+selenium
+beautifulsoup4
+undetected-chromedriver
+fake-useragent
+selenium-wire
+urllib3
+blinker==1.7.0
+setuptools
+streamlit
+webdriver_manager
