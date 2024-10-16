@@ -90,7 +90,7 @@ def get_soup1(url):
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
-    driver = uc.Chrome(options=options, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    driver = uc.Chrome(options=options)
 
     try:
         driver.get(url)
@@ -177,7 +177,7 @@ def get_soup_scrapeops(url, api_key):
     option.add_argument("--disable-gpu")
     option.add_argument("--no-sandbox")
     option.add_argument("--disable-dev-shm-usage")
-    driver = uc.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), seleniumwire_options=proxy_options, options=option)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option)
     driver.request_interceptor = interceptor
     try:
         driver.get(url)
@@ -660,7 +660,7 @@ def get_urls(url, api_key):
     option.add_argument("--window-size=1000,800")  # Set window size to 1200x800
 
     # Initialize the WebDriver with proxy options
-    driver = uc.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), seleniumwire_options=proxy_options, options=option)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option)
     driver.set_window_size(1000, 800)  # Set window size directly
 
     # Optional: Interceptor to modify requests (if needed)
