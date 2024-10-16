@@ -10,3 +10,4 @@ blinker==1.7.0
 setuptools
 streamlit
 webdriver_manager
+chromedriver-autoinstaller
