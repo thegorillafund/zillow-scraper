@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 import chromedriver_autoinstaller
 
-chromedriver_autoinstaller.install()
+# chromedriver_autoinstaller.install()
 
 
 def show_download_data(result_df, state, city, formatted_date, sold):
