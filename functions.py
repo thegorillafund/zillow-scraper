@@ -90,7 +90,7 @@ def get_soup1(url):
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
-    driver = uc.Chrome(options=options, service = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+    driver = uc.Chrome(options=options, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
 
     try:
         driver.get(url)
