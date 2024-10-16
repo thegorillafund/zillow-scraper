@@ -16,6 +16,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import undetected_chromedriver as uc
 from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 
 
 def generate_zillow_url(state, city=None, page=1, sold_only=False):
@@ -89,7 +90,7 @@ def get_soup1(url):
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
-    driver = uc.Chrome(options=options)
+    driver = uc.Chrome(options=options, service = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
 
     try:
         driver.get(url)
@@ -176,7 +177,7 @@ def get_soup_scrapeops(url, api_key):
     option.add_argument("--disable-gpu")
     option.add_argument("--no-sandbox")
     option.add_argument("--disable-dev-shm-usage")
-    driver = uc.Chrome(service=Service(ChromeDriverManager().install()), seleniumwire_options=proxy_options, options=option)
+    driver = uc.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), seleniumwire_options=proxy_options, options=option)
     driver.request_interceptor = interceptor
     try:
         driver.get(url)
@@ -659,7 +660,7 @@ def get_urls(url, api_key):
     option.add_argument("--window-size=1000,800")  # Set window size to 1200x800
 
     # Initialize the WebDriver with proxy options
-    driver = uc.Chrome(service=Service(ChromeDriverManager().install()), seleniumwire_options=proxy_options, options=option)
+    driver = uc.Chrome(service=Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), seleniumwire_options=proxy_options, options=option)
     driver.set_window_size(1000, 800)  # Set window size directly
 
     # Optional: Interceptor to modify requests (if needed)
