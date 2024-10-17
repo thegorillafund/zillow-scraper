@@ -81,7 +81,7 @@ def generate_zillow_url(state, city=None, page=1, sold_only=False):
 
 def get_soup1(url):
     options = uc.ChromeOptions()
-    options.add_argument('--headless')  # Run in headless mode (no GUI)
+    # options.add_argument('--headless')  # Run in headless mode (no GUI)
     options.add_argument('--no-sandbox')  # Bypass OS security model
     options.add_argument('--disable-dev-shm-usage')  # Disable shared memory
     options.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
@@ -156,7 +156,7 @@ def get_soup_scrapeops(url, api_key):
     }
 
     option = uc.ChromeOptions()
-    option.add_argument('--headless')  # Run in headless mode (no GUI)
+    # option.add_argument('--headless')  # Run in headless mode (no GUI)
     option.add_argument('--no-sandbox')  # Bypass OS security model
     option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
     option.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
@@ -466,102 +466,6 @@ def get_listing_agency(soup):
         return None
 
 
-# def get_urls(url, api_key):
-#     print("Scraping using ScrapeOps with slow scrolling")
-#     SCRAPEOPS_API_KEY = api_key
-
-#     ## Define ScrapeOps Proxy Port Endpoint
-#     proxy_options = {
-#         "proxy": {
-#             "http": f"http://scrapeops.headless_browser_mode=true:{SCRAPEOPS_API_KEY}@proxy.scrapeops.io:5353",
-#             "https": f"http://scrapeops.headless_browser_mode=true:{SCRAPEOPS_API_KEY}@proxy.scrapeops.io:5353",
-#             "no_proxy": "localhost:127.0.0.1",
-#         }
-#     }
-
-#     # driver_path = "/usr/local/bin/chromedriver"
-#     # service = Service(executable_path=driver_path)
-#     service = Service(ChromeDriverManager().install())
-
-#     # Chrome options to ensure proper rendering
-#     option = wd.ChromeOptions()
-#     option.add_argument("--disable-gpu")
-#     # option.add_argument("--headless")
-#     option.add_argument("--no-sandbox")
-#     option.add_argument("--disable-dev-shm-usage")
-#     option.add_argument(
-#         "--start-maximized"
-#     )  # Ensure the window is large enough for all elements to be visible
-
-#     # Initialize the WebDriver with proxy options
-#     driver = wd.Chrome(
-#         seleniumwire_options=proxy_options, options=option, service=service
-#     )
-
-#     # Optional: Interceptor to modify requests (if needed)
-#     driver.request_interceptor = interceptor
-
-#     try:
-#         driver.get(url)
-
-#         # Wait for the initial page to load by waiting for a key element (e.g., pagination or footer)
-#         wait = WebDriverWait(driver, 30)
-#         wait.until(
-#             EC.presence_of_element_located((By.CSS_SELECTOR, ".search-pagination"))
-#         )  # Adjust this selector based on your page
-
-#         # SCROLLING LOOP: Slow scrolling with pauses
-#         SCROLL_PAUSE_TIME = 10  # Pause time between scrolls in seconds
-#         SCROLL_PIXELS = 500  # Number of pixels to scroll each time
-
-#         last_height = driver.execute_script(
-#             "return document.body.scrollHeight"
-#         )  # Get initial scroll height
-
-#         while True:
-#             # Scroll down by a fixed number of pixels (e.g., 500 pixels)
-#             driver.execute_script(f"window.scrollBy(0, {SCROLL_PIXELS});")
-
-#             # Wait for new content to load
-#             time.sleep(SCROLL_PAUSE_TIME)
-
-#             # Calculate new scroll height after scrolling
-#             new_height = driver.execute_script("return document.body.scrollHeight")
-
-#             # If the page height hasn't increased, we've reached the bottom
-#             if new_height == last_height:
-#                 break
-
-#             last_height = new_height  # Update the last scroll height to the new height
-
-#         # After scrolling is complete and all content is loaded, get the rendered page source
-#         content = driver.page_source
-#         soup = BeautifulSoup(content, "html.parser")
-
-#         # Now that the full page is loaded, scrape all desired 'li' elements with the specific class
-#         li_elements = soup.find_all(
-#             "li",
-#             class_="ListItem-c11n-8-105-0__sc-13rwu5a-0 StyledListCardWrapper-srp-8-105-0__sc-wtsrtn-0 gpgmwS cXzrsE",
-#         )  # Replace with your target class
-#         links = [
-#             link.find("a").get("href")
-#             for link in li_elements
-#             if link.find("a") is not None
-#         ]
-#         links = [link for link in links if "homedetails" in link]
-
-#         print(f"Scraped {len(links)} urls")
-#         return links
-
-#         # return soup
-
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
-#         return None
-
-#     finally:
-#         driver.quit()
-
 
 def get_urls(url, api_key):
     print("Scraping using ScrapeOps with slow scrolling")
@@ -582,7 +486,7 @@ def get_urls(url, api_key):
 
     # Chrome options to ensure proper rendering
     option = uc.ChromeOptions()
-    option.add_argument('--headless')  # Run in headless mode (no GUI)
+    # option.add_argument('--headless')  # Run in headless mode (no GUI)
     option.add_argument('--no-sandbox')  # Bypass OS security model
     option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
     option.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
