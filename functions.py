@@ -84,7 +84,7 @@ def generate_zillow_url(state, city=None, page=1, sold_only=False):
 def get_soup1(url):
     
     # options = uc.ChromeOptions()
-    options = Options
+    options = Options()
     # options.add_argument('--headless')  # Run in headless mode (no GUI)
     options.add_argument('--no-sandbox')  # Bypass OS security model
     options.add_argument('--disable-dev-shm-usage')  # Disable shared memory
@@ -171,7 +171,7 @@ def get_soup_scrapeops(url, api_key):
     }
     
     # option = uc.ChromeOptions()
-    option = Options
+    option = Options()
     # option.add_argument('--headless')  # Run in headless mode (no GUI)
     option.add_argument('--no-sandbox')  # Bypass OS security model
     option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
@@ -516,7 +516,7 @@ def get_urls(url, api_key):
 
     # Chrome options to ensure proper rendering
     # option = uc.ChromeOptions()
-    option = Options
+    option = Options()
     # option.add_argument('--headless')  # Run in headless mode (no GUI)
     option.add_argument('--no-sandbox')  # Bypass OS security model
     option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
