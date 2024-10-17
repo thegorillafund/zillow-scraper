@@ -90,7 +90,7 @@ def get_soup1(url):
     options.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
     options.add_argument('--remote-debugging-port=9222')  # Enable remote debugging (needed in headless)
     options.add_argument('--disable-software-rasterizer')  #
-    driver = uc.Chrome(options=options, use_subprocess=False, service=Service(os.path.join("/tmp", "chromedriver")))
+    driver = uc.Chrome(options=options, use_subprocess=False, service=Service(ChromeDriverManager().install()))
 
     # options = Options()
     # options.add_argument('--no-sandbox')  # Bypass OS security model
@@ -189,7 +189,7 @@ def get_soup_scrapeops(url, api_key):
     option.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
     option.add_argument('--remote-debugging-port=9222')  # Enable remote debugging (needed in headless)
     option.add_argument('--disable-software-rasterizer')  
-    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False, service=Service(ChromeDriverManager().install()))
     # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False, service=Service(os.path.join("/tmp", "chromedriver")))
     # driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.request_interceptor = interceptor
@@ -536,7 +536,7 @@ def get_urls(url, api_key):
     # option.add_argument("--window-size=1000,800")  # Set window size to 1200x800
 
     # # Initialize the WebDriver with proxy options
-    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False, service=Service(ChromeDriverManager().install()))
     # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False, service=Service(os.path.join("/tmp", "chromedriver")))
     # driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False)
     driver.set_window_size(1000, 800)  # Set window size directly
