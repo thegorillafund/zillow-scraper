@@ -101,7 +101,7 @@ def get_soup1(url):
     # options.add_argument('--headless')  
 
     # Automatically download and install the correct version of GeckoDriver
-    driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()), options=options)
+    driver = wd.Firefox(service=Service(GeckoDriverManager().install()), options=options)
 
     try:
         driver.get(url)
@@ -176,7 +176,7 @@ def get_soup_scrapeops(url, api_key):
 
 
     # Use selenium-wire's WebDriver with Firefox and proxy options
-    driver = webdriver.Firefox(
+    driver = wd.Firefox(
         seleniumwire_options=proxy_options,
         options=options,
         service=Service(GeckoDriverManager().install())
@@ -518,7 +518,7 @@ def get_urls(url, api_key):
 
 
     # Use selenium-wire's WebDriver with Firefox and proxy options
-    driver = webdriver.Firefox(
+    driver = wd.Firefox(
         seleniumwire_options=proxy_options,
         options=options,
         service=Service(GeckoDriverManager().install())
