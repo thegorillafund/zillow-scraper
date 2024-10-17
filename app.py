@@ -6,41 +6,14 @@ import json
 from datetime import datetime
 import chromedriver_autoinstaller
 import os
-import zipfile
-import requests
 
 # chromedriver_autoinstaller.install()
 # Set ChromeDriver installation directory to /tmp (or any other accessible directory)
-
-# Check if ChromeDriver is already installed in /tmp, otherwise install it
-def download_chromedriver(version="120"):
-    # Set the download URL based on the version you want
-    download_url = f"https://chromedriver.storage.googleapis.com/{version}.0.6099.24/chromedriver_linux64.zip"
-
-    # Set the path to store the ChromeDriver
-    driver_zip_path = "/tmp/chromedriver.zip"
-    driver_extracted_path = "/tmp/chromedriver"
-
-    # Download ChromeDriver zip
-    response = requests.get(download_url)
-    with open(driver_zip_path, "wb") as file:
-        file.write(response.content)
-
-    # Extract ChromeDriver
-    with zipfile.ZipFile(driver_zip_path, "r") as zip_ref:
-        zip_ref.extractall("/tmp/")
-
-    # Make the chromedriver executable
-    os.chmod(driver_extracted_path, 0o755)
-
-    return driver_extracted_path
-
-# Set the path for chromedriver in the /tmp directory
 chromedriver_path = os.path.join("/tmp", "chromedriver")
 
-# Check if chromedriver already exists, if not, download it
+# Check if ChromeDriver is already installed in /tmp, otherwise install it
 if not os.path.exists(chromedriver_path):
-    chromedriver_path = download_chromedriver(version="120")
+    chromedriver_autoinstaller.install(path="/tmp")
 
 
 def show_download_data(result_df, state, city, formatted_date, sold):
