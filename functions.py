@@ -91,7 +91,7 @@ def get_soup1(url):
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
     # driver = uc.Chrome(options=options, use_subprocess=False)
-    driver = uc.Chrome(use_subprocess=False)
+    driver = uc.Chrome(use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
 
     try:
         driver.get(url)
@@ -179,7 +179,7 @@ def get_soup_scrapeops(url, api_key):
     # option.add_argument("--no-sandbox")
     # option.add_argument("--disable-dev-shm-usage")
     # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
-    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.request_interceptor = interceptor
     try:
         driver.get(url)
@@ -663,7 +663,7 @@ def get_urls(url, api_key):
 
     # Initialize the WebDriver with proxy options
     # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
-    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False)
+    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.set_window_size(1000, 800)  # Set window size directly
 
     # Optional: Interceptor to modify requests (if needed)
