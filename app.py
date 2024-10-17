@@ -12,8 +12,9 @@ import os
 chromedriver_path = os.path.join("/tmp", "chromedriver")
 
 # Check if ChromeDriver is already installed in /tmp, otherwise install it
-if not os.path.exists(chromedriver_path):
-    chromedriver_autoinstaller.install(path="/tmp")
+# if not os.path.exists(chromedriver_path):
+print('installing chromedriver...')
+chromedriver_autoinstaller.install(path="/tmp")
 
 
 def show_download_data(result_df, state, city, formatted_date, sold):
