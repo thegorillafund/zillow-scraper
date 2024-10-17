@@ -1,2 +1,2 @@
-apt-get install chromium
-apt-get install chromium-driver
+chromium-browser
+chromium-chromedriver
