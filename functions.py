@@ -80,18 +80,18 @@ def generate_zillow_url(state, city=None, page=1, sold_only=False):
 
 
 def get_soup1(url):
-    # options = uc.ChromeOptions()
+    options = uc.ChromeOptions()
     # options.add_argument("--ignore-certificate-errors")
-    # options.add_argument("--headless")
-    # options.add_argument("--disable-gpu")
-    # options.add_argument("--no-sandbox")
-    # options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
     # driver_path = "/usr/local/bin/chromedriver"
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
-    # driver = uc.Chrome(options=options, use_subprocess=False)
-    driver = uc.Chrome(use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    driver = uc.Chrome(options=options, use_subprocess=False)
+    # driver = uc.Chrome(use_subprocess=False)
 
     try:
         driver.get(url)
@@ -173,13 +173,13 @@ def get_soup_scrapeops(url, api_key):
     # driver_path = "/usr/local/bin/chromedriver"
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
-    # option = uc.ChromeOptions()
+    option = uc.ChromeOptions()
     # option.add_argument("--headless")
-    # option.add_argument("--disable-gpu")
-    # option.add_argument("--no-sandbox")
-    # option.add_argument("--disable-dev-shm-usage")
-    # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
-    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    option.add_argument("--disable-gpu")
+    option.add_argument("--no-sandbox")
+    option.add_argument("--disable-dev-shm-usage")
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
+    # driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.request_interceptor = interceptor
     try:
         driver.get(url)
@@ -219,54 +219,54 @@ def get_soup_scrapeops(url, api_key):
         driver.quit()
 
 
-def get_soup(url):
-    # Initialize options for undetected_chromedriver
-    options = uc.ChromeOptions()
-    options.add_argument("--ignore-certificate-errors")
+# def get_soup(url):
+#     # Initialize options for undetected_chromedriver
+#     options = uc.ChromeOptions()
+#     options.add_argument("--ignore-certificate-errors")
 
-    # Random User-Agent
-    ua = UserAgent()
-    user_agent = ua.random
-    options.add_argument(f"user-agent={user_agent}")
+#     # Random User-Agent
+#     ua = UserAgent()
+#     user_agent = ua.random
+#     options.add_argument(f"user-agent={user_agent}")
 
-    # Initialize the undetected chromedriver with options
-    driver = uc.Chrome(options=options)
+#     # Initialize the undetected chromedriver with options
+#     driver = uc.Chrome(options=options)
 
-    try:
-        # Open the URL
-        driver.get(url)
+#     try:
+#         # Open the URL
+#         driver.get(url)
 
-        # Implementing a random wait time
-        time.sleep(random.uniform(2, 5))  # Random sleep between 2 and 5 seconds
+#         # Implementing a random wait time
+#         time.sleep(random.uniform(2, 5))  # Random sleep between 2 and 5 seconds
 
-        # Simulate a user scroll to load dynamic content
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(random.uniform(1, 3))  # Random sleep after scrolling
+#         # Simulate a user scroll to load dynamic content
+#         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+#         time.sleep(random.uniform(1, 3))  # Random sleep after scrolling
 
-        # Click the button without waiting for it to be clickable
-        try:
-            show_more_button = driver.find_element(
-                By.CLASS_NAME,
-                "StyledTextButton-c11n-8-100-1__sc-1nwmfqo-0.hcHpXi.expando-icon",
-            )
-            show_more_button.click()
-            time.sleep(random.uniform(1, 3))  # Random sleep after clicking
-        except Exception as e:
-            print(f"Button not found or could not be clicked: {e}")
-            pass
+#         # Click the button without waiting for it to be clickable
+#         try:
+#             show_more_button = driver.find_element(
+#                 By.CLASS_NAME,
+#                 "StyledTextButton-c11n-8-100-1__sc-1nwmfqo-0.hcHpXi.expando-icon",
+#             )
+#             show_more_button.click()
+#             time.sleep(random.uniform(1, 3))  # Random sleep after clicking
+#         except Exception as e:
+#             print(f"Button not found or could not be clicked: {e}")
+#             pass
 
-        # Get the updated page source after clicking the button
-        content = driver.page_source
-        soup = BeautifulSoup(content, "html.parser")
+#         # Get the updated page source after clicking the button
+#         content = driver.page_source
+#         soup = BeautifulSoup(content, "html.parser")
 
-        return soup
+#         return soup
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return None
+#     except Exception as e:
+#         print(f"An error occurred: {e}")
+#         return None
 
-    finally:
-        driver.quit()
+#     finally:
+#         driver.quit()
 
 
 def get_price(soup):
@@ -654,16 +654,16 @@ def get_urls(url, api_key):
     # service = Service(ChromeDriverManager().install())
 
     # Chrome options to ensure proper rendering
-    # option = uc.ChromeOptions()
-    # option.add_argument("--disable-gpu")
+    option = uc.ChromeOptions()
+    option.add_argument("--disable-gpu")
     # option.add_argument("--headless")
-    # option.add_argument("--no-sandbox")
-    # option.add_argument("--disable-dev-shm-usage")
+    option.add_argument("--no-sandbox")
+    option.add_argument("--disable-dev-shm-usage")
     # option.add_argument("--window-size=1000,800")  # Set window size to 1200x800
 
     # Initialize the WebDriver with proxy options
-    # driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
-    driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+    driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False)
+    # driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False)
     driver.set_window_size(1000, 800)  # Set window size directly
 
     # Optional: Interceptor to modify requests (if needed)
