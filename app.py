@@ -5,8 +5,15 @@ import pandas as pd
 import json
 from datetime import datetime
 import chromedriver_autoinstaller
+import os
 
-chromedriver_autoinstaller.install()
+# chromedriver_autoinstaller.install()
+# Set ChromeDriver installation directory to /tmp (or any other accessible directory)
+chromedriver_path = os.path.join("/tmp", "chromedriver")
+
+# Check if ChromeDriver is already installed in /tmp, otherwise install it
+if not os.path.exists(chromedriver_path):
+    chromedriver_autoinstaller.install(path="/tmp")
 
 
 def show_download_data(result_df, state, city, formatted_date, sold):
