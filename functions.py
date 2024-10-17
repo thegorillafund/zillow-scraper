@@ -82,14 +82,20 @@ def generate_zillow_url(state, city=None, page=1, sold_only=False):
 def get_soup1(url):
     options = uc.ChromeOptions()
     # options.add_argument("--ignore-certificate-errors")
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    # options.add_argument("--headless")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument("--no-sandbox")
+    # options.add_argument("--disable-dev-shm-usage")
     # driver_path = "/usr/local/bin/chromedriver"
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     # driver = wd.Chrome(options=options, service=service)
+    options.add_argument('--headless')  # Run in headless mode (no GUI)
+    options.add_argument('--no-sandbox')  # Bypass OS security model
+    options.add_argument('--disable-dev-shm-usage')  # Disable shared memory
+    options.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
+    options.add_argument('--remote-debugging-port=9222')  # Enable remote debugging (needed in headless)
+    options.add_argument('--disable-software-rasterizer')  #
     driver = uc.Chrome(options=options, use_subprocess=False, service=Service(os.path.join("/tmp", "chromedriver")))
     # driver = uc.Chrome(use_subprocess=False)
 
@@ -174,10 +180,16 @@ def get_soup_scrapeops(url, api_key):
     # service = Service(executable_path=driver_path)
     # driver = webdriver.Chrome(options=options, service=service)
     option = uc.ChromeOptions()
+    option.add_argument('--headless')  # Run in headless mode (no GUI)
+    option.add_argument('--no-sandbox')  # Bypass OS security model
+    option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
+    option.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
+    option.add_argument('--remote-debugging-port=9222')  # Enable remote debugging (needed in headless)
+    option.add_argument('--disable-software-rasterizer')  #
     # option.add_argument("--headless")
-    option.add_argument("--disable-gpu")
-    option.add_argument("--no-sandbox")
-    option.add_argument("--disable-dev-shm-usage")
+    # option.add_argument("--disable-gpu")
+    # option.add_argument("--no-sandbox")
+    # option.add_argument("--disable-dev-shm-usage")
     driver = uc.Chrome(seleniumwire_options=proxy_options, options=option, use_subprocess=False, service=Service(os.path.join("/tmp", "chromedriver")))
     # driver = uc.Chrome(seleniumwire_options=proxy_options, use_subprocess=False, service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
     driver.request_interceptor = interceptor
@@ -655,10 +667,12 @@ def get_urls(url, api_key):
 
     # Chrome options to ensure proper rendering
     option = uc.ChromeOptions()
-    option.add_argument("--disable-gpu")
-    # option.add_argument("--headless")
-    option.add_argument("--no-sandbox")
-    option.add_argument("--disable-dev-shm-usage")
+    option.add_argument('--headless')  # Run in headless mode (no GUI)
+    option.add_argument('--no-sandbox')  # Bypass OS security model
+    option.add_argument('--disable-dev-shm-usage')  # Disable shared memory
+    option.add_argument('--disable-gpu')  # Disable GPU (since there's no display)
+    option.add_argument('--remote-debugging-port=9222')  # Enable remote debugging (needed in headless)
+    option.add_argument('--disable-software-rasterizer')  #
     # option.add_argument("--window-size=1000,800")  # Set window size to 1200x800
 
     # Initialize the WebDriver with proxy options
