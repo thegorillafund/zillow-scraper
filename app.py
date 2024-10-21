@@ -113,7 +113,7 @@ with open("config.json", "r") as file:
 
 api_key = config.get("api_key")
 
-st.title("Zillow Scraper")
+st.title("Zillow Scraper (Updated)")
 land_status = st.selectbox("Choose land status", ["For Sale", "Sold", "All"])
 
 col1, col2 = st.columns(2)
