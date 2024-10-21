@@ -7,16 +7,6 @@ from datetime import datetime
 import chromedriver_autoinstaller
 import os
 
-# chromedriver_autoinstaller.install()
-# Set ChromeDriver installation directory to /tmp (or any other accessible directory)
-# chromedriver_path = os.path.join("/tmp", "chromedriver")
-
-# Check if ChromeDriver is already installed in /tmp, otherwise install it
-# if not os.path.exists(chromedriver_path):
-# print('installing chromedriver...')
-# chromedriver_autoinstaller.install(path="/tmp")
-
-
 def show_download_data(result_df, state, city, formatted_date, sold):
     @st.cache_data
     def convert_df(df):
@@ -113,7 +103,7 @@ with open("config.json", "r") as file:
 
 api_key = config.get("api_key")
 
-st.title("Zillow Scraper (Updated)")
+st.title("Zillow Scraper Application")
 land_status = st.selectbox("Choose land status", ["For Sale", "Sold", "All"])
 
 col1, col2 = st.columns(2)
