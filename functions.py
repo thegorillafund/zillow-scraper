@@ -574,7 +574,8 @@ def get_urls(url, api_key):
         # Now that the full page is loaded, scrape all desired 'li' elements with the specific class
         li_elements = soup.find_all(
             "li",
-            class_="ListItem-c11n-8-105-0__sc-13rwu5a-0 StyledListCardWrapper-srp-8-105-0__sc-wtsrtn-0 gpgmwS cXzrsE",
+            # class_="ListItem-c11n-8-105-0__sc-13rwu5a-0 StyledListCardWrapper-srp-8-105-0__sc-wtsrtn-0 gpgmwS cXzrsE",
+            class_="ListItem-c11n-8-105-2__sc-13rwu5a-0 StyledListCardWrapper-srp-8-105-2__sc-wtsrtn-0 dBKvME gzviqu"
         )  # Replace with your target class
         links = [
             link.find("a").get("href")
