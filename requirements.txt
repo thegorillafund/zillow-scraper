@@ -11,3 +11,5 @@ setuptools
 streamlit
 webdriver_manager
 chromedriver-autoinstaller
+google-cloud-aiplatform
+google-cloud-logging
